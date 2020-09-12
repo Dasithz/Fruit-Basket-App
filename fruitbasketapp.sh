@@ -14,6 +14,7 @@ else
     #echo "exit code: $?"
 fi
 
+#CSV Validation
 awk 'FNR>2 || NR==2' ./*$filename > $processedfile
 
 awk 'BEGIN{FS=OFS=","} NF!=4{print "not enough fields"; exit 1} !($2 ~ "^[0-9][0-9]*$") {print"2nd field need to contain numerical values. please check"; exit 1 }' $processedfile
