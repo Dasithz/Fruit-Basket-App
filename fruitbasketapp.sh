@@ -1,31 +1,71 @@
 #!/bin/bash
+filepath=/home/dasitha/
 filename=test.csv
 processedfile=processed.csv
 header=1
+absolutefile=$filepath$filename
 
 
-if [ -f "$filename" ]; then
+if [ -f "$filepath$filename" ]; then
     echo -e "\e[33m $filename exists. Continuing to process data..."
     echo -e "\e[0m"
 else
-    echo -e "\e[31m File $filename does not exist. Terminating the script!"
+    echo -e "\e[31m File $filename does not exist in the $filepath. Terminating the script!"
     echo -e "\e[0m"
-    exit 1
-    #echo "exit code: $?"
+    exit 1 
 fi
 
-#CSV Validation
-awk 'FNR>2 || NR==2' ./*$filename > $processedfile
+awk 'FNR>2 || NR==2' $absolutefile > $processedfile
 
-awk 'BEGIN{FS=OFS=","} NF!=4{print "not enough fields"; exit 1} !($2 ~ "^[0-9][0-9]*$") {print"2nd field need to contain numerical values. please check"; exit 1 }' $processedfile
-
-
+awk 'BEGIN{FS=OFS=","} NF!=4{print " "; exit 2} !($2 ~ "^[0-9][0-9]*$") {print" "; exit 3 }' $processedfile
 
 ecode=$?
-if [ $ecode -ne 0 ]; then
-    echo -e "\e[31mTerminating the script due to the csv validation failure"
+if [ $ecode -eq 2 ]; then
+    echo -e "\e[31mTerminating the script due to the csv validation failure! CSV contains more or less fields than expected. Please check the $filename file which located under $filepath"
     echo -e "\e[0m"
+    rm $processedfile
+    exit 1
 fi
+
+if [ $ecode -eq 3 ]; then
+    echo -e "\e[31mTerminating the script due to the csv validation failure! 2nd field needs to contain numertical value.... Please check the $filename file which located under $filepath"
+    echo -e "\e[0m"
+    rm $processedfile
+    exit 1
+fi
+
+
+
+awk 'BEGIN{FS=OFS=","} ($1 ~ "^[0-9][0-9]*$") {print "\033[31mNumertical values detected in first field of the csv file! Please check \033[0m "; exit 4 } ' $processedfile
+ecode=$?
+if [ $ecode -eq 4 ]; then
+    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
+    echo -e "\e[0m"
+    rm $processedfile
+    exit 1
+fi
+
+
+awk 'BEGIN{FS=OFS=","} ($3 ~ "^[0-9][0-9]*$") {print "\033[31mNumertical values detected in third field of the csv file! Please check \033[0m "; exit 4 } ' $processedfile
+ecode=$?
+if [ $ecode -eq 4 ]; then
+    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
+    echo -e "\e[0m"
+    rm $processedfile
+    exit 1
+fi
+
+
+
+awk 'BEGIN{FS=OFS=","} ($4 ~ "^[0-9][0-9]*$") {print "\033[31mNumertical values detected in fourth field of the csv file! Please check \033[0m "; exit 4 } ' $processedfile
+ecode=$?
+if [ $ecode -eq 4 ]; then
+    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
+    echo -e "\e[0m"
+    rm $processedfile
+    exit 1
+fi
+
 
 fruits=$(cat $processedfile | wc -l)
 distinct=$(cut -d, -f1 $processedfile | sort -u | wc -l)
@@ -33,7 +73,7 @@ distinct=$(cut -d, -f1 $processedfile | sort -u | wc -l)
 echo -e "number of \e[31mfruits:\e[0m"
 echo $(($fruits-$header)); echo 
 
-echo -e "Total types of \e[31mfruis:\e[0m" 
+echo -e "Total types of \e[31mfruits:\e[0m" 
 echo $(($distinct-$header)); echo
 
 echo -e "Oldest fruit & \e[31mage:\e[0m"
