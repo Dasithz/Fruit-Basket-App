@@ -45,7 +45,7 @@ $ NODE_ENV=production node app
 ```
 1 Change the filepath variable to the path where you have uploaded the CSV file.
 2 Change te file name to the exact file name which you have uploaded.
-3.Save and exit 
+3 Save and exit 
 4. Execute the script  ```./fruitbasketapp.sh ```
 
 ### Sample Out put
@@ -88,3 +88,11 @@ root@instance-1:/home/dasitha#
 ```
 
 ![Execution](https://github.com/Dasithz/Fruit-Basket-App/blob/master/Help/Images/Sample_Out_Put.PNG)
+
+
+### Addressed CSV validations
+
+- Check whether all required columns (4) exist or not
+- Check whether the exactly the second column contains only numbers
+- Validated all other columns for Alphabetic characters
+- File location validation 
