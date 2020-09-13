@@ -36,7 +36,16 @@ fi
 
 
 
-awk 'BEGIN{FS=OFS=","} ($1 ~ "^[0-9][0-9]*$") {print "\033[31mNumertical values detected in first field of the csv file! Please check \033[0m "; exit 4 } ' $processedfile
+awk 'BEGIN{FS=OFS=","} !($1 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumertical values detected in first field of the csv file! Please check \033[0m "; exit 4 }' processed.csv
+ecode=$?
+if [ $ecode -eq 4 ]; then
+    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
+    echo -e "\e[0m"
+    rm $processedfile
+    exit 1
+fi
+
+awk 'BEGIN{FS=OFS=","} !($3 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumertical values detected in third field of the csv file! Please check \033[0m "; exit 4 }' $processedfile
 ecode=$?
 if [ $ecode -eq 4 ]; then
     echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
@@ -46,18 +55,7 @@ if [ $ecode -eq 4 ]; then
 fi
 
 
-awk 'BEGIN{FS=OFS=","} ($3 ~ "^[0-9][0-9]*$") {print "\033[31mNumertical values detected in third field of the csv file! Please check \033[0m "; exit 4 } ' $processedfile
-ecode=$?
-if [ $ecode -eq 4 ]; then
-    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
-    echo -e "\e[0m"
-    rm $processedfile
-    exit 1
-fi
-
-
-
-awk 'BEGIN{FS=OFS=","} ($4 ~ "^[0-9][0-9]*$") {print "\033[31mNumertical values detected in fourth field of the csv file! Please check \033[0m "; exit 4 } ' $processedfile
+awk 'BEGIN{FS=OFS=","} !($4 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumertical values detected in fourth field of the csv file! Please check \033[0m "; exit 4 }' $processedfile
 ecode=$?
 if [ $ecode -eq 4 ]; then
     echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
