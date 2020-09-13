@@ -1,1 +1,89 @@
 # Fruit-Basket-App
+
+[![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Bash_Logo_black_and_white_icon_only.svg/512px-Bash_Logo_black_and_white_icon_only.svg.png)](https://nodesource.com/products/nsolid)
+
+## Overview
+This is an command-line application written by bash scripting and designed to run on Linux distributions.
+
+## prerequisites 
+
+Need to have read write and execution permission for the logged in user.
+Required GNU Awk 4.1.3, API: 1.1 (GNU MPFR 3.1.4, GNU MP 6.1.0) version or above 
+Need to have an editor tool (VIM , Nano etc..)
+
+Make sure to have git installed as a dependency
+```sh
+apt-get update
+apt-get install git
+```
+
+### Installation
+
+Clone the application using the below command
+
+```sh
+git clone https://github.com/Dasithz/Fruit-Basket-App.git
+```
+Navigate to the application folder 
+```sh
+cd Fruit-Basket-App
+```
+
+Upload your CSV file to the prefered location and make sure you have access to the uploaded location from the logged in user.
+
+Open the fruitbasketapp.sh application using your desired editor. 
+Locate the below 
+
+```sh
+#!/bin/bash
+filepath=/home/dasitha/
+filename=test.csv
+processedfile=processed.csv
+header=1
+absolutefile=$filepath$filename
+$ NODE_ENV=production node app
+```
+1 Change the filepath variable to the path where you have uploaded the CSV file.
+2 Change te file name to the exact file name which you have uploaded.
+3.Save and exit 
+4. Execute the script  ```./fruitbasketapp.sh ```
+
+### Sample Out put
+
+```
+root@instance-1:/home/dasitha# ./fruitbasketapp.sh
+ test.csv exists. Continuing to process data...
+
+number of fruits:
+21
+
+Total types of fruits:
+4
+
+Oldest fruit & age:
+pineapple: 6
+orange: 6
+
+The number of each type of fruit in descending order:
+orange: 6
+apple: 5
+pineapple: 4
+grapefruit: 4
+watermelon: 3
+
+The various characteristics (count, color, shape, etc.) of each fruit by type:
+      1 apple: green, tart
+      3 apple: red, sweet
+      1 apple: yellow, sweet
+      2 grapefruit: bitter, yellow
+      2 grapefruit: yellow, bitter
+      5 orange: round, sweet
+      1 orange: sweet, round
+      2 pineapple: prickly, sweet
+      2 pineapple: sweet, prickly
+      1 watermelon: green, heavy
+      2 watermelon: heavy, green
+
+root@instance-1:/home/dasitha#
+```
+
