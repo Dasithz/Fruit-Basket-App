@@ -99,8 +99,8 @@ root@instance-1:/home/dasitha#
 
 ### Error Dictionary 
 
-| Exit Code &nbsp; &nbsp;|                                                                                                                                         Message                                                                                                                                         |
-|:---------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Exit Code &nbsp; &nbsp;|  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Message                                                |
+|:---------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Exit 1 `  | File <filename> does not exist in the <filepath>.  Terminating the script! Exit code set to 1                                                                                                                                                                                           |
 | `Exit 2 `  | Exit Code : 2 ! Terminating the script due to the csv validation failure! CSV contains more or less fields than expected.  Please check the <filename> file which located under <filepath>                                                                                              |
 | `Exit 3 `  | Exit Code : 3 ! Terminating the script due to the csv validation failure! 2nd field needs to contain numerical value....  <br /> Please check the <filename> file which located under <filepath>"                                                                                    |
