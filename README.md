@@ -90,9 +90,20 @@ root@instance-1:/home/dasitha#
 ![Execution](https://github.com/Dasithz/Fruit-Basket-App/blob/master/Help/Images/Sample_Out_Put.PNG)
 
 
-### Addressed CSV validations
+### Implemented CSV validations
 
 - Check whether all required columns (4) exist or not
 - Check whether the exactly the second column contains only numbers
 - Validated all other columns for Alphabetic characters
 - File location validation 
+
+### Error Dictionary 
+
+| Exit Code |                                                                                                                                         Message                                                                                                                                         |
+|:---------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `exit 1`  | File <filename> does not exist in the <filepath>.  Terminating the script! Exit code set to 1                                                                                                                                                                                           |
+| `exit 2`  | Exit Code : 2 ! Terminating the script due to the csv validation failure! CSV contains more or less fields than expected.  Please check the <filename> file which located under <filepath>                                                                                              |
+| `exit 3`  | Exit Code : <exit_code> ! Terminating the script due to the csv validation failure! 2nd field needs to contain numerical value....  Please check the <filename> file which located under <filepath>"                                                                                    |
+| `exit 4`  | Numerical values detected in the 1st field of the CSV file! Please check... Exit Code : 4 ! Terminating the script due to the csv validation failure! Unexpected numerical value detection. Expected value: characters. Please check the <filename> file which located under <filepath> |
+| `exit 5`  | Numerical values detected in the 2nd field of the CSV file! Please check... Exit Code : 5 ! Terminating the script due to the CSV validation failure! Unexpected numerical value detection. Expected value: characters. Please check the <filename> file which located under <filepath> |
+| `exit 6`  | Numerical values detected in the 4th field of the CSV file! Please check... Exit Code : 5 ! Terminating the script due to the CSV validation failure! Unexpected numerical value detection. Expected value: characters. Please check the <filename> file which located under <filepath> |

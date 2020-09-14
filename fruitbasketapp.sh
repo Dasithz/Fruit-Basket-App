@@ -10,7 +10,7 @@ if [ -f "$filepath$filename" ]; then
     echo -e "\e[33m $filename exists. Continuing to process data..."
     echo -e "\e[0m"
 else
-    echo -e "\e[31m File $filename does not exist in the $filepath. Terminating the script!"
+    echo -e "\e[31m Exit Code: 1 File $filename does not exist in the $filepath. Terminating the script! "
     echo -e "\e[0m"
     exit 1 
 fi
@@ -21,14 +21,14 @@ awk 'BEGIN{FS=OFS=","} NF!=4{print " "; exit 2} !($2 ~ "^[0-9][0-9]*$") {print" 
 
 ecode=$?
 if [ $ecode -eq 2 ]; then
-    echo -e "\e[31mTerminating the script due to the csv validation failure! CSV contains more or less fields than expected. Please check the $filename file which located under $filepath"
+    echo -e "\e[31m Exit Code : $ecode ! Terminating the script due to the csv validation failure! CSV contains more or less fields than expected. Please check the $filename file which located under $filepath"
     echo -e "\e[0m"
     rm $processedfile
     exit 1
 fi
 
 if [ $ecode -eq 3 ]; then
-    echo -e "\e[31mTerminating the script due to the csv validation failure! 2nd field needs to contain numertical value.... Please check the $filename file which located under $filepath"
+    echo -e "\e[31m Exit Code : $ecode ! Terminating the script due to the csv validation failure! 2nd field needs to contain numerical value.... Please check the $filename file which located under $filepath"
     echo -e "\e[0m"
     rm $processedfile
     exit 1
@@ -36,29 +36,29 @@ fi
 
 
 
-awk 'BEGIN{FS=OFS=","} !($1 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumertical values detected in first field of the csv file! Please check \033[0m "; exit 4 }' processed.csv
+awk 'BEGIN{FS=OFS=","} !($1 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumerical values detected in the 1st field of the CSV file! Please check... \033[0m "; exit 4 }' processed.csv
 ecode=$?
 if [ $ecode -eq 4 ]; then
-    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
+    echo -e "\e[31m Exit Code : $ecode ! Terminating the script due to the csv validation failure! Unexpected numerical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
     echo -e "\e[0m"
     rm $processedfile
     exit 1
 fi
 
-awk 'BEGIN{FS=OFS=","} !($3 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumertical values detected in third field of the csv file! Please check \033[0m "; exit 4 }' $processedfile
+awk 'BEGIN{FS=OFS=","} !($3 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumerical values detected in the 3rd field of the CSV file! Please check... \033[0m "; exit 5 }' $processedfile
 ecode=$?
-if [ $ecode -eq 4 ]; then
-    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
+if [ $ecode -eq 5 ]; then
+    echo -e "\e[31m Exit Code : $ecode ! Terminating the script due to the csv validation failure! Unexpected numerical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
     echo -e "\e[0m"
     rm $processedfile
     exit 1
 fi
 
 
-awk 'BEGIN{FS=OFS=","} !($4 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumertical values detected in fourth field of the csv file! Please check \033[0m "; exit 4 }' $processedfile
+awk 'BEGIN{FS=OFS=","} !($4 ~ "^[a-zA-Z][a-zA-Z]*$") {print "\033[31mNumerical values detected in 4th field of the csv file! Please check \033[0m "; exit 6 }' $processedfile
 ecode=$?
-if [ $ecode -eq 4 ]; then
-    echo -e "\e[31mTerminating the script due to the csv validation failure! Unexpected numertical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
+if [ $ecode -eq 6 ]; then
+    echo -e "\e[31m Exit Code : $ecode ! Terminating the script due to the csv validation failure! Unexpected numerical value detection. Expected value : characters. Please check the $filename file which located under $filepath"
     echo -e "\e[0m"
     rm $processedfile
     exit 1
