@@ -4,6 +4,12 @@
 
 ## Overview
 This is an command-line application written by bash scripting and designed to run on Linux distributions.
+A user should be able to create the report by providing the path to the CSV-file to the application. The CSV-file represents a catalog of all the fruit in a fruit bowl.
+
+Each line is a piece of fruit. The data representing a particular fruit include:
+
+| fruit type | age in days | ad-hoc characteristic 1 | ad-hoc characteristic 2
+
 
 ## Prerequisites 
 
