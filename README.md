@@ -5,7 +5,7 @@
 ## Overview
 This is an command-line application written by bash scripting and designed to run on Linux distributions.
 
-## prerequisites 
+## Prerequisites 
 
 Need to have read write and execution permission for the logged in user.
 Required GNU Awk 4.1.3, API: 1.1 (GNU MPFR 3.1.4, GNU MP 6.1.0) version or above 
