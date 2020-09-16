@@ -43,10 +43,11 @@ header=1
 absolutefile=$filepath$filename
 $ NODE_ENV=production node app
 ```
-1 Change the filepath variable to the path where you have uploaded the CSV file.
-2 Change te file name to the exact file name which you have uploaded.
-3 Save and exit 
-4. Execute the script  ```./fruitbasketapp.sh ```
+
+1. Change the filepath variable to the path where you have uploaded the CSV file.
+1. Change te file name to the exact file name which you have uploaded.
+1. Save and exit 
+1. Execute the script  ```./fruitbasketapp.sh ```
 
 ### Sample Out put
 
